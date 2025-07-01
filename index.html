@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Statement Converter - Convert PDF to Excel Instantly</title>
+    <meta name="description" content="Convert PDF bank statements to Excel format instantly. Secure, accurate, and trusted by thousands of financial institutions worldwide.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4f46e5;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4f46e5;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: #10b981;
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Features Section */
+        .features {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1f2937;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 80px 0;
+            color: white;
+        }
+
+        .upload-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .upload-area {
+            border: 2px dashed #64748b;
+            border-radius: 16px;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .pricing h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card.featured {
+            border-color: #4f46e5;
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .plan-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4f46e5;
+            margin-bottom: 1rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .plan-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">BankConverter Pro</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#upload">Convert</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Convert Bank Statements<br>to Excel Instantly</h1>
+            <p>Transform PDF bank statements from 1000+ banks worldwide into clean, organized Excel files. Secure, accurate, and trusted by financial professionals.</p>
+            <a href="#upload" class="cta-button">Start Converting Now</a>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Why Choose Our Converter?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Bank-Grade Security</h3>
+                    <p>Your financial data is protected with enterprise-level encryption and strict privacy standards.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Convert your statements in seconds with our advanced AI-powered processing technology.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>99.9% Accuracy</h3>
+                    <p>Our algorithms are continuously refined to ensure perfect data extraction and formatting.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Institutional Trust</h3>
+                    <p>Used by thousands of accounting firms, banks, and legal professionals worldwide.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Global Support</h3>
+                    <p>Compatible with bank statements from over 1000 financial institutions globally.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Clean Excel Output</h3>
+                    <p>Get perfectly formatted spreadsheets ready for analysis, accounting, or reporting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="upload-section" id="upload">
+        <div class="container">
+            <div class="upload-container">
+                <h2>Upload Your Bank Statement</h2>
+                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                    <div class="upload-icon">📄</div>
+                    <h3>Drop your PDF here or click to browse</h3>
+                    <p>Supports PDF files up to 10MB</p>
+                    <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+                </div>
+                <p style="margin-top: 1rem; opacity: 0.8;">Your file will be processed securely and deleted after conversion.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>Choose Your Plan</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Anonymous</div>
+                    <div class="plan-price">Free</div>
+                    <ul class="plan-features">
+                        <li>1 page every 24 hours</li>
+                        <li>No registration required</li>
+                        <li>Basic support</li>
+                        <li>Standard processing</li>
+                    </ul>
+                    <a href="#upload" class="cta-button">Start Free</a>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="plan-name">Registered</div>
+                    <div class="plan-price">Free</div>
+                    <ul class="plan-features">
+                        <li>5 pages every 24 hours</li>
+                        <li>Free registration</li>
+                        <li>Email support</li>
+                        <li>Priority processing</li>
+                        <li>Conversion history</li>
+                    </ul>
+                    <a href="#register" class="cta-button">Register Free</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="plan-name">Professional</div>
+                    <div class="plan-price">$29/mo</div>
+                    <ul class="plan-features">
+                        <li>Unlimited conversions</li>
+                        <li>Bulk processing</li>
+                        <li>API access</li>
+                        <li>Premium support</li>
+                        <li>Custom formats</li>
+                    </ul>
+                    <a href="#subscribe" class="cta-button">Subscribe Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2025 BankConverter Pro. All rights reserved. | <a href="mailto:support@bankconverter.com" style="color: #60a5fa;">Contact Support</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // File upload handler
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                alert('File selected: ' + e.target.files[0].name + '\nIntegrate with your backend processing here.');
+            }
+        });
+    </script>
+</body>
+</html>
